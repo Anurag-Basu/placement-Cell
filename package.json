@@ -1,0 +1,21 @@
+{
+  "name": "placement-cell",
+  "version": "1.0.0",
+  "description": "Placement cell where students can apply for jobs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Aman Gupta",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^14.2.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.7",
+    "passport": "^0.5.2",
+    "passport-jwt": "^4.0.0"
+  }
+}
