@@ -1,29 +1,77 @@
 const express = require("express");
-const path = require("path");
-require("dotenv").config();
-const port = process.env.PORT;
-
-//adding mongoose files to the database
-const db = require("./config/mongoose");
-
-//adding express as the server
 const app = express();
+require("dotenv").config();
+require("./config/view_helpers")(app);
 
-//connected ejs as view engine
-app.set("view engine", "ejs");
-//joined the path of views folder to our current directory and then set that as our views
-app.set("views", path.join(__dirname, "views"));
+const cookieParser = require("cookie-parser");
+const port = process.env.PORT;
+const db = require("./config/mongoose.config");
+const path = require("path");
 
-//encoding the code send by the browser
+// used for authentication cookie
+const session = require("express-session");
+const passport = require("passport");
+const passportLocal = require("./config/passport.config");
+
+const MongoStore = require("connect-mongo");
+
+// flash message
+const flash = require("connect-flash");
+// middleware to store flash messages
+const customMware = require("./config/middleware");
+
+// Html parser
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-//adding css and js
-app.use(express.static("assets"));
 
-//asking the server to start
-app.listen(port, function (err) {
+// Cookie Parser
+app.use(cookieParser());
+
+//static files
+app.use(express.static(path.join(__dirname, "assets")));
+
+// setup view engine
+app.set("view engine", "ejs");
+app.set("views", "./views");
+
+// use MongoStore to store cookie in mongodb
+app.use(
+  session({
+    name: "placementCell",
+    secret: "hjbhjbjjnj",
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+      maxAge: 1000 * 60 * 100,
+    },
+    store: MongoStore.create(
+      {
+        mongoUrl: process.env.MONGO_URI,
+        autoRemove: "disabled",
+      },
+      function (err) {
+        console.log(err || "mongodb setup ok");
+      }
+    ),
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(passport.setAuthenticatedUser);
+
+// use flash
+app.use(flash());
+app.use(customMware.setFlash);
+
+// use router
+app.use("/", require("./routes"));
+
+app.listen(port, (err) => {
   if (err) {
-    console.log(`error in running the server : ${err}`);
+    console.log(`Error in starting server ${err}`);
     return;
   }
-  console.log(`server is running on port : ${port}`);
+  console.log(`Server is running on port ; ${port}`);
 });
