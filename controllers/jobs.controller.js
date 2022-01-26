@@ -27,7 +27,7 @@ module.exports.create = async (req, res) => {
 module.exports.getJob = async (req, res) => {
   try {
     const job = await Job.findOne({
-      id: req.params.id,
+      _id: req.params.id,
     }).populate("students");
     if (!job) {
       req.flash("error", `Job does not exist!`);
@@ -44,7 +44,7 @@ module.exports.getJob = async (req, res) => {
 module.exports.addStudent = async (req, res) => {
   try {
     const job = await Job.findOne({
-      id: req.body.jobId,
+      _id: req.body.jobId,
     }).populate("students");
     if (!job) {
       req.flash("error", `Job does not exist!`);
@@ -69,6 +69,7 @@ module.exports.addStudent = async (req, res) => {
     await job.save();
 
     student.result.push({ job: job.id, score: "DONTATTEMPT" });
+    student.interviews.push(job.id);
     await student.save();
 
     req.flash("success", `Student added successfully!`);

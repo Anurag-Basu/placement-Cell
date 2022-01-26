@@ -4,10 +4,13 @@ const passport = require("passport");
 const studentController = require("../controllers/students.controller");
 
 router.post("/add", passport.checkAuthenticated, studentController.addStudent);
-// router.get(
-//   "/remove/:id",
-//   passport.checkAuthenticated,
-//   studentController.removeStudent
-// );
+router.get("/", passport.checkAuthenticated, studentController.getAll);
+router.get("/:id", passport.checkAuthenticated, studentController.getStudent);
+router.post(
+  "/update",
+  passport.checkAuthenticated,
+  studentController.updateStudent
+);
+
 
 module.exports = router;

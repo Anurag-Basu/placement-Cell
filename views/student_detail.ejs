@@ -1,0 +1,135 @@
+<!-- Student detail -->
+<aside
+  class="shadow md:w-1/4 bg-white dark:border-white border-gray-400 md:border-r-2 dark:bg-gray-800"
+>
+  <div class="p-3 rounded">
+    <div class="flex-shrink-0 mb-3 flex justify-center">
+      <img
+        class="w-12 h-12 rounded-full"
+        src="https://cdn2.iconfinder.com/data/icons/multimedia-collection-13/128/200211-03-512.png"
+        alt="Neil image"
+      />
+    </div>
+    <p class="name dark:text-white text-xl mb-2">
+      <span class="text-md mr-3">Name : </span> <%= student.name %>
+    </p>
+    <p class="name dark:text-white text-sm mb-2">
+      <span class="text-md mr-3">Email : </span><%= student.email %>
+    </p>
+    <p class="name dark:text-white text-sm mb-2">
+      <span class="text-md mr-3">Placement status : </span><%= student.status %>
+    </p>
+    <p class="name dark:text-white text-sm mb-2">
+      <span class="text-md mr-3">College : </span><%= student.college %>
+    </p>
+    <p class="name dark:text-white text-sm mb-2">
+      <span class="text-md mr-3">DSA score : </span><%= student.dsaScore %>
+    </p>
+    <p class="name dark:text-white text-sm mb-2">
+      <span class="text-md mr-3">Web score : </span><%= student.webScore %>
+    </p>
+    <p class="name dark:text-white text-sm mb-2">
+      <span class="text-md mr-3">React score : </span><%= student.reactScore %>
+    </p>
+  </div>
+</aside>
+<!-- End Student detail -->
+
+<main class="job-container md:w-3/4 p-4 bg-white dark:bg-gray-800">
+  <p
+    class="p-3 border-b-2 text-xl text-blue-500 dark:text-white mb-3 bg-white dark:border-white border-gray-400 dark:bg-gray-800"
+  >
+    Interviews
+  </p>
+  <div class="Interviews">
+    <% for(let job of student.interviews){ %>
+    <div
+      class="bg-white w-full flex justify-between rounded-lg border shadow-md md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+    >
+      <a href="<%= locals.user ? `/jobs/${job.id}` : `/` %>">
+        <div class="flex flex-col justify-between p-4 leading-normal">
+          <h5
+            class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+          >
+            <%= job.position %>
+          </h5>
+          <p class="mb-3 font-normal text-sm text-blue-500 dark:text-blue-300">
+            <%= job.company %>
+          </p>
+          <div class="job-details flex justify-between">
+            <span class="text-gray-800 dark:text-white"
+              ><span class="mr-3 text-gray-400">Pay</span><%= job.package
+              %></span
+            >
+            <span class="text-gray-800 dark:text-white"
+              ><span class="mr-3 text-gray-400">Application Deadline</span><%=
+              new Date(job.deadline).toDateString() %></span
+            >
+            <span class="text-gray-800 dark:text-white"
+              ><span class="mr-3 text-gray-400">Lccation</span><%= job.location
+              %></span
+            >
+          </div>
+        </div>
+      </a>
+      <form
+        class="w-44 block p-4"
+        name="addStudent"
+        action="/students/update"
+        method="post"
+      >
+        <div class="form-field mb-6">
+          <label
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            for="position"
+            >Email :</label
+          >
+          <select
+            required
+            name="score"
+            value="<%= student.result.find(res => res.job === job.id).score %>"
+            id="status"
+            class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          >
+            <option
+              <%= student.result.find(res => res.job === job.id).score === 'DONTATTEMPT' ? `selected`: ``  %>
+              value="DONTATTEMPT"
+            >
+              Don't Attempt
+            </option>
+            <option
+              <%= student.result.find(res => res.job === job.id).score === 'FAIL' ? `selected`: ``  %>
+              value="FAIL"
+            >
+              Fail
+            </option>
+            <option
+              <%= student.result.find(res => res.job === job.id).score === 'ONHOLD' ? `selected`: ``  %>
+              value="ONHOLD"
+            >
+              On hold
+            </option>
+            <option
+              <%= student.result.find(res => res.job === job.id).score === 'PASS' ? `selected`: ``  %>
+              value="PASS"
+            >
+              Pass
+            </option>
+          </select>
+          <small></small>
+        </div>
+        <input type="hidden" name="jobId" value="<%= job.id %>" />
+        <input type="hidden" name="sId" value="<%= student.id %>" />
+        <div class="form-field mb-6">
+          <button
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            type="submit"
+          >
+            Update
+          </button>
+        </div>
+      </form>
+    </div>
+    <% } %>
+  </div>
+</main>

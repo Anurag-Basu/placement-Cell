@@ -48,32 +48,34 @@
     >
       <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
         <% for(let student of job.students){ %>
-        <li class="p-3 sm:p-4 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
-          <div class="flex items-center space-x-4">
-            <div class="flex-shrink-0">
-              <img
-                class="w-8 h-8 rounded-full"
-                src="https://cdn2.iconfinder.com/data/icons/multimedia-collection-13/128/200211-03-512.png"
-                alt="Neil image"
-              />
+        <a href="/students/<%= student.id %>">
+          <li
+            class="p-3 sm:p-4 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+          >
+            <div class="flex items-center space-x-4">
+              <div class="flex-shrink-0">
+                <img
+                  class="w-8 h-8 rounded-full"
+                  src="https://cdn2.iconfinder.com/data/icons/multimedia-collection-13/128/200211-03-512.png"
+                  alt="Neil image"
+                />
+              </div>
+              <div class="flex-1 min-w-0">
+                <p
+                  class="text-sm font-medium text-gray-900 truncate dark:text-white"
+                >
+                  <%= student.name %>
+                </p>
+                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                  <%= student.email %>
+                </p>
+                <p class="text-xs text-gray-900 truncate dark:text-white">
+                  <%= student.result.find(r => r.job === job.id).score %>
+                </p>
+              </div>
             </div>
-            <div class="flex-1 min-w-0">
-              <p
-                class="text-sm font-medium text-gray-900 truncate dark:text-white"
-              >
-                <%= student.name %>
-              </p>
-              <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                <%= student.email %>
-              </p>
-              <p
-                class="text-xs text-gray-900 truncate dark:text-white"
-              >
-                <%= student.result.find(r => r.job === job.id).score %>
-              </p>
-            </div>
-          </div>
-        </li>
+          </li>
+        </a>
         <% } %>
       </ul>
     </div>

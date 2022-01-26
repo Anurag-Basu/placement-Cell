@@ -4,9 +4,6 @@ const passwordEl = document.querySelector("#password");
 const confirmPasswordEl = document.querySelector("#confirm-password");
 
 const form = document.querySelector(".form form");
-console.log("loaded");
-
-console.log("object");
 
 const checkUsername = () => {
   let valid = false;
@@ -150,7 +147,6 @@ form.addEventListener("submit", function (e) {
 
   // submit to the server if the form is valid
   if (isFormValid) {
-    console.log("valid");
     form.submit();
   }
 });
