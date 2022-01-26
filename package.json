@@ -10,7 +10,7 @@
     "node": "16.13.0",
     "yarn": "1.22.17"
   },
-  "author": "Aman Gupta",
+  "author": "Anurag kumar",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
