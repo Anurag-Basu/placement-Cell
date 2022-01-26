@@ -38,6 +38,16 @@ const studentSchema = new mongoose.Schema(
         ref: "Job",
       },
     ],
+    result: [
+      {
+        job: String,
+        score: {
+          type: String,
+          enum: ["PASS", "FAIL", "ONHOLD", "DONTATTEMPT"],
+          default: "DONTATTEMPT",
+        },
+      },
+    ],
   },
   {
     timestamps: true,

@@ -1,4 +1,5 @@
 const Job = require("../models/job.model");
+const Student = require("../models/student.model");
 
 module.exports.create = async (req, res) => {
   try {
@@ -16,6 +17,61 @@ module.exports.create = async (req, res) => {
     job = await Job.create(req.body);
 
     req.flash("success", "Job added!");
+    return res.redirect("back");
+  } catch (e) {
+    console.log(e);
+    return res.redirect("back");
+  }
+};
+
+module.exports.getJob = async (req, res) => {
+  try {
+    const job = await Job.findOne({
+      id: req.params.id,
+    }).populate("students");
+    if (!job) {
+      req.flash("error", `Job does not exist!`);
+      return res.redirect("back");
+    }
+
+    return res.render("job_detail", { job });
+  } catch (e) {
+    console.log(e);
+    return res.redirect("back");
+  }
+};
+
+module.exports.addStudent = async (req, res) => {
+  try {
+    const job = await Job.findOne({
+      id: req.body.jobId,
+    }).populate("students");
+    if (!job) {
+      req.flash("error", `Job does not exist!`);
+      return res.redirect("back");
+    }
+    const student = await Student.findOne({ email: req.body.email });
+    if (!student) {
+      req.flash(
+        "error",
+        `Student with email ${req.body.email} does not exist!`
+      );
+      return res.redirect("back");
+    }
+
+    const exist = job.students.filter((stu) => stu.email === req.body.email);
+    if (exist.length > 0) {
+      req.flash("error", `Student already added to interview!`);
+      return res.redirect("back");
+    }
+
+    job.students.push(student.id);
+    await job.save();
+
+    student.result.push({ job: job.id, score: "DONTATTEMPT" });
+    await student.save();
+
+    req.flash("success", `Student added successfully!`);
     return res.redirect("back");
   } catch (e) {
     console.log(e);

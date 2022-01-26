@@ -34,10 +34,6 @@ const jobSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    // score: {
-    //   type: String,
-    //   enum: ["PASS", "FAIL", "ONHOLD", "DONTATTEMPT"],
-    // },
     students: [
       {
         type: mongoose.Schema.Types.ObjectId,
