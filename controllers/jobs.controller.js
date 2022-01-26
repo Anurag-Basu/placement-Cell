@@ -71,7 +71,11 @@ module.exports.addStudent = async (req, res) => {
     job.students.push(student.id);
     await job.save();
 
-    student.result.push({ job: job.id, score: "DONTATTEMPT" });
+    student.result.push({
+      job: job.id,
+      score: "DONTATTEMPT",
+      date: req.body.date,
+    });
     student.interviews.push(job.id);
     await student.save();
 

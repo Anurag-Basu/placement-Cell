@@ -46,6 +46,7 @@ const studentSchema = new mongoose.Schema(
           enum: ["PASS", "FAIL", "ONHOLD", "DONTATTEMPT"],
           default: "DONTATTEMPT",
         },
+        date: String,
       },
     ],
   },
