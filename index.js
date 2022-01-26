@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const port = process.env.PORT;
 const db = require("./config/mongoose.config");
 const path = require("path");
+const expressLayouts = require("express-ejs-layouts");
 
 // used for authentication cookie
 const session = require("express-session");
@@ -26,6 +27,13 @@ app.use(express.json());
 
 // Cookie Parser
 app.use(cookieParser());
+
+// layouts
+app.use(expressLayouts);
+
+// set styles and scripts for sub pages
+app.set("layout extractStyles", true);
+app.set("layout extractScripts", true);
 
 //static files
 app.use("/static", express.static(path.join(__dirname, "assets")));

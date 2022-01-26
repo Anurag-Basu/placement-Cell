@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const jobSchema = new mongoose.Schema(
   {
+    position: {
+      type: String,
+      required: true,
+    },
     company: {
       type: String,
       required: true,
@@ -18,14 +22,22 @@ const jobSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    skills: {
-      type: Number,
+    jobDesc: {
+      type: String,
       required: true,
     },
-    score: {
-      type: Number,
-      enum: ["PASS", "FAIL", "ONHOLD", "DONTATTEMPT"],
+    companyDesc: {
+      type: String,
+      required: true,
     },
+    skills: {
+      type: String,
+      required: true,
+    },
+    // score: {
+    //   type: String,
+    //   enum: ["PASS", "FAIL", "ONHOLD", "DONTATTEMPT"],
+    // },
     students: [
       {
         type: mongoose.Schema.Types.ObjectId,

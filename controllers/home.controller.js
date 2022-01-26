@@ -1,5 +1,6 @@
-const User = require("../models/user.model");
+const Job = require("../models/job.model");
 
 module.exports.index = async (req, res) => {
-  res.render("home");
+  const jobs = await Job.find({});
+  res.render("home", { jobs });
 };
