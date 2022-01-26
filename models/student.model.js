@@ -35,7 +35,7 @@ const studentSchema = new mongoose.Schema(
     interviews: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Interview",
+        ref: "Job",
       },
     ],
   },

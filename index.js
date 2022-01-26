@@ -28,7 +28,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 //static files
-app.use(express.static(path.join(__dirname, "assets")));
+app.use("/static", express.static(path.join(__dirname, "assets")));
 
 // setup view engine
 app.set("view engine", "ejs");
