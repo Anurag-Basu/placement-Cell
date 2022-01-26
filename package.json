@@ -4,7 +4,7 @@
   "description": "Placement cell where students can apply for jobs",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "author": "Aman Gupta",
   "license": "ISC",
