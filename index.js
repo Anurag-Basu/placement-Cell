@@ -1,12 +1,18 @@
+// Require express
 const express = require("express");
 const app = express();
+
+// Access env variables
 require("dotenv").config();
 require("./config/view_helpers")(app);
 
+// Cookie parser
 const cookieParser = require("cookie-parser");
 const port = process.env.PORT;
 const db = require("./config/mongoose.config");
 const path = require("path");
+
+// Express layout for global layout
 const expressLayouts = require("express-ejs-layouts");
 
 // used for authentication cookie
@@ -14,6 +20,7 @@ const session = require("express-session");
 const passport = require("passport");
 const passportLocal = require("./config/passport.config");
 
+// For storing session in db
 const MongoStore = require("connect-mongo");
 
 // flash message
@@ -64,6 +71,7 @@ app.use(
   })
 );
 
+// Initializing passport
 app.use(passport.initialize());
 app.use(passport.session());
 

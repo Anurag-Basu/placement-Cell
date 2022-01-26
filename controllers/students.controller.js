@@ -1,5 +1,6 @@
 const Student = require("../models/student.model");
 
+// Add a student
 module.exports.addStudent = async (req, res) => {
   try {
     let student = await Student.findOne({ email: req.body.email });
@@ -20,6 +21,7 @@ module.exports.addStudent = async (req, res) => {
   }
 };
 
+// Return all students
 module.exports.getAll = async (req, res) => {
   try {
     const students = await Student.find({});
@@ -31,6 +33,7 @@ module.exports.getAll = async (req, res) => {
   }
 };
 
+// Return single student
 module.exports.getStudent = async (req, res) => {
   try {
     const student = await Student.findOne({
@@ -50,6 +53,7 @@ module.exports.getStudent = async (req, res) => {
   }
 };
 
+// Update student interview status
 module.exports.updateStudent = async (req, res) => {
   try {
     const student = await Student.findOne({

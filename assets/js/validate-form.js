@@ -5,6 +5,7 @@ const confirmPasswordEl = document.querySelector("#confirm-password");
 
 const form = document.querySelector(".form");
 
+// Validate name
 const checkUsername = () => {
   let valid = false;
 
@@ -27,6 +28,7 @@ const checkUsername = () => {
   return valid;
 };
 
+// validate email
 const checkEmail = () => {
   let valid = false;
   const email = emailEl.value.trim();
@@ -41,6 +43,7 @@ const checkEmail = () => {
   return valid;
 };
 
+// validate password
 const checkPassword = () => {
   let valid = false;
 
@@ -61,6 +64,7 @@ const checkPassword = () => {
   return valid;
 };
 
+// validate confirm password
 const checkConfirmPassword = () => {
   let valid = false;
   // check confirm password
@@ -79,6 +83,7 @@ const checkConfirmPassword = () => {
   return valid;
 };
 
+// Reges for email
 const isEmailValid = (email) => {
   const re =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

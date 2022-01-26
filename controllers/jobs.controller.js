@@ -1,6 +1,7 @@
 const Job = require("../models/job.model");
 const Student = require("../models/student.model");
 
+// Add job
 module.exports.create = async (req, res) => {
   try {
     let job = await Job.findOne({
@@ -24,6 +25,7 @@ module.exports.create = async (req, res) => {
   }
 };
 
+// Get single job
 module.exports.getJob = async (req, res) => {
   try {
     const job = await Job.findOne({
@@ -41,6 +43,7 @@ module.exports.getJob = async (req, res) => {
   }
 };
 
+// Add student to a interview
 module.exports.addStudent = async (req, res) => {
   try {
     const job = await Job.findOne({

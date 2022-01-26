@@ -1,6 +1,7 @@
 const User = require("../models/user.model");
 const bcrypt = require("bcrypt");
 
+// Render signup page
 module.exports.signUp = (req, res) => {
   if (req.isAuthenticated()) {
     req.flash("error", "You are already Signed in!");
@@ -9,6 +10,7 @@ module.exports.signUp = (req, res) => {
   return res.render("user_signup", { title: "Placement cell | Sign Up" });
 };
 
+// Create user
 module.exports.create = (req, res) => {
   if (req.body.password !== req.body.confirm_password) {
     return res.redirect("back");
@@ -41,6 +43,7 @@ module.exports.create = (req, res) => {
   });
 };
 
+// Login
 module.exports.signIn = (req, res) => {
   if (req.isAuthenticated()) {
     req.flash("error", "You are already Signed in!");
@@ -49,10 +52,12 @@ module.exports.signIn = (req, res) => {
   return res.render("user_signin", { title: "Placement cell | Sign In" });
 };
 
+// Create session
 module.exports.createSession = (req, res) => {
   req.flash("success", "Logged in Successfully");
   return res.redirect("/");
 };
+
 // sign out
 module.exports.destroySession = (req, res) => {
   req.logout();
