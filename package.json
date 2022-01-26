@@ -6,6 +6,10 @@
   "scripts": {
     "start": "node index.js"
   },
+  "engines": {
+    "node": "16.13.0",
+    "yarn": "1.22.17"
+  },
   "author": "Aman Gupta",
   "license": "ISC",
   "dependencies": {
