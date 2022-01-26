@@ -1,29 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in</title>
-</head>
-<body>
-    <div class="sign-in-form form white-back">
-    <form action="/users/create-session" method="post">
-        <div class="form-field">
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email" autocomplete="off" placeholder="Enter email">
-            <small></small>
-        </div>
-
-        <div class="form-field">
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" autocomplete="off" placeholder="Enter password">
-            <small></small>
-        </div>
-
-        <button class="btn submit-btn" type="submit">Sign in</button>
-    </form>
-    <a href="/users/signup">Sign up</a>
+<div
+  class="p-4 w-full bg-white flex justify-center"
+>
+  <form
+    class="form p-4 space-y-6 w-1/2 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
+    action="/users/create-session"
+    name="sign-in-form"
+  >
+    <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+      Sign in to our platform
+    </h3>
+    <div class="form-field">
+      <label
+        for="email"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+        >Your email</label
+      >
+      <input
+        type="email"
+        name="email"
+        id="email"
+        autocomplete="off"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+        placeholder="name@company.com"
+        required
+      />
+      <small class="text-red-800"></small>
+    </div>
+    <div class="form-field">
+      <label
+        for="password"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+        >Your password</label
+      >
+      <input
+        type="password"
+        name="password"
+        id="password"
+        autocomplete="off"
+        placeholder="••••••••"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+        required
+      />
+      <small class="text-red-900"></small>
+    </div>
+    <button
+      type="submit"
+      class="w-full btn submit-btn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    >
+      Login to your account
+    </button>
+    <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
+      Not registered?
+      <a
+        href="/users/signup"
+        class="text-blue-700 hover:underline dark:text-blue-500"
+        >Create account</a
+      >
+    </div>
+  </form>
 </div>
-</body>
-</html>
+
+<script src="/static/js/validate-form.js"></script>

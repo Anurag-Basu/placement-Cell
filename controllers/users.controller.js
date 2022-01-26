@@ -6,8 +6,7 @@ module.exports.signUp = (req, res) => {
     req.flash("error", "You are already Signed in!");
     return res.redirect("/users/profile");
   }
-  req.flash("success", "You are Signed up successfully!");
-  return res.render("user_signup", { title: "nocial | Sign Up" });
+  return res.render("user_signup", { title: "Placement cell | Sign Up" });
 };
 
 module.exports.create = (req, res) => {
@@ -47,7 +46,7 @@ module.exports.signIn = (req, res) => {
     req.flash("error", "You are already Signed in!");
     return res.redirect("/");
   }
-  return res.render("user_signin", { title: "nocial | Sign In" });
+  return res.render("user_signin", { title: "Placement cell | Sign In" });
 };
 
 module.exports.createSession = (req, res) => {
